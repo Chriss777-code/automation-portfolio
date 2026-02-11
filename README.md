@@ -4,7 +4,9 @@
 
 Created by Chris Soto | [GitHub](https://github.com/Chriss777-code)
 
-## 🛠️ Projects (12 Total)
+---
+
+## 🛠️ Projects (14 Total)
 
 ### Web Scraping & Data Extraction
 | Project | Description | Tech Stack |
@@ -20,12 +22,13 @@ Created by Chris Soto | [GitHub](https://github.com/Chriss777-code)
 |---------|-------------|------------|
 | [x-automation](./x-automation) | X/Twitter stealth posting & engagement | DrissionPage, Python |
 
-### Workflow Automation
+### Workflow & Email Automation
 | Project | Description | Tech Stack |
 |---------|-------------|------------|
 | [n8n-templates](./n8n-templates) | Ready-to-import n8n workflows | n8n, JSON |
 | [automation-templates](./automation-templates) | Playwright automation templates | Playwright, Python |
 | [parallel-research-tool](./parallel-research-tool) | AI sub-agent orchestration | OpenClaw, Python |
+| [email-automation](./email-automation) | Bulk email with templates | SMTP, Python |
 
 ### API Integrations
 | Project | Description | Tech Stack |
@@ -33,10 +36,17 @@ Created by Chris Soto | [GitHub](https://github.com/Chriss777-code)
 | [api-integrations](./api-integrations) | Airtable ↔ Google Sheets sync | Google APIs, Python |
 | [sheets-integration](./sheets-integration) | Google Sheets data pipelines | Google APIs, Python |
 
+### Short-Term Rental (STR)
+| Project | Description | Tech Stack |
+|---------|-------------|------------|
+| [str-automation](./str-automation) | Airbnb/VRBO guest messaging | Python |
+
 ### Bot Development
 | Project | Description | Tech Stack |
 |---------|-------------|------------|
 | [telegram-bot-framework](./telegram-bot-framework) | Telegram bot architecture | python-telegram-bot |
+
+---
 
 ## 🔥 Key Features
 
@@ -46,6 +56,8 @@ Created by Chris Soto | [GitHub](https://github.com/Chriss777-code)
 - **Multiple Outputs**: JSON, CSV, Google Sheets formats
 - **Production Ready**: Error handling, logging, documentation
 - **DrissionPage**: Native Python, faster than Selenium, auto-handles Cloudflare
+
+---
 
 ## 📦 Quick Start
 
@@ -64,9 +76,9 @@ playwright install chromium
 python -c "from DrissionPage import ChromiumPage; p=ChromiumPage(); p.get('https://bot.sannysoft.com'); print('Stealth:', p.title)"
 ```
 
-## 🎯 Services Available
+---
 
-Looking for custom automation? I can help with:
+## 🎯 Services Available
 
 | Service | Description | Rate |
 |---------|-------------|------|
@@ -74,15 +86,21 @@ Looking for custom automation? I can help with:
 | Data Extraction | PDFs, documents, websites | $35-75/hr |
 | Google Sheets Automation | Pipelines, sync, reporting | $30-60/hr |
 | n8n/Make Workflows | Custom automation flows | $50-100/hr |
-| Telegram Bots | Notifications, commands, automation | $40-80/hr |
+| Telegram Bots | Notifications, commands | $40-80/hr |
 | Price Monitoring | E-commerce tracking + alerts | $50-100 fixed |
 | LinkedIn Extraction | Profile data at scale | $50-150 fixed |
+| Email Automation | Templates, bulk send, tracking | $40-80/hr |
+| STR Guest Messaging | Airbnb/VRBO automation | $50-100 fixed |
 | X/Twitter Automation | Stealth posting & engagement | Consulting |
 | API Integrations | Connect any two services | $50-150/hr |
+
+---
 
 ## 📬 Contact
 
 Available for freelance work on Upwork.
+
+---
 
 ## 📝 License
 
@@ -91,4 +109,5 @@ MIT - Use freely, modify as needed.
 ---
 
 *Built overnight by Neo (AI Assistant) with ☕ and Python*
-*12 projects, 60+ files, 5,000+ lines of code*
+*14 projects • 70+ files • 6,000+ lines of code*
+*13 commits in one night*
