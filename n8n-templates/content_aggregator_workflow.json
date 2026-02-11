@@ -1,0 +1,118 @@
+{
+  "name": "AI Content Aggregator",
+  "description": "Aggregate RSS feeds, summarize with AI, and create a daily digest",
+  "nodes": [
+    {
+      "id": "trigger",
+      "name": "Daily at 7am",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "position": [250, 300],
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "field": "cronExpression",
+              "expression": "0 7 * * *"
+            }
+          ]
+        }
+      },
+      "notes": "Run daily at 7am. Adjust time as needed."
+    },
+    {
+      "id": "rss1",
+      "name": "TechCrunch RSS",
+      "type": "n8n-nodes-base.rssFeedRead",
+      "position": [450, 200],
+      "parameters": {
+        "url": "https://techcrunch.com/feed/",
+        "options": {
+          "limit": 5
+        }
+      }
+    },
+    {
+      "id": "rss2",
+      "name": "Hacker News RSS",
+      "type": "n8n-nodes-base.rssFeedRead",
+      "position": [450, 400],
+      "parameters": {
+        "url": "https://hnrss.org/frontpage",
+        "options": {
+          "limit": 5
+        }
+      }
+    },
+    {
+      "id": "merge",
+      "name": "Merge Feeds",
+      "type": "n8n-nodes-base.merge",
+      "position": [650, 300],
+      "parameters": {
+        "mode": "append"
+      }
+    },
+    {
+      "id": "format",
+      "name": "Format for AI",
+      "type": "n8n-nodes-base.code",
+      "position": [850, 300],
+      "parameters": {
+        "jsCode": "const items = $input.all();\nconst articles = items.map(item => {\n  return `Title: ${item.json.title}\\nLink: ${item.json.link}\\nSnippet: ${(item.json.contentSnippet || '').substring(0, 200)}`;\n}).join('\\n\\n---\\n\\n');\n\nreturn [{ json: { articles } }];"
+      },
+      "notes": "Combine all articles into a single text block for AI"
+    },
+    {
+      "id": "openai",
+      "name": "AI Summarize",
+      "type": "@n8n/n8n-nodes-langchain.openAi",
+      "position": [1050, 300],
+      "parameters": {
+        "operation": "message",
+        "model": "gpt-4o-mini",
+        "prompt": "Here are today's top tech articles:\n\n{{ $json.articles }}\n\nCreate a brief daily digest with:\n1. Top 3 most important stories (1 sentence each)\n2. Key themes/trends today\n3. One thing to watch\n\nKeep it under 200 words. Be concise and insightful."
+      }
+    },
+    {
+      "id": "telegram",
+      "name": "Send to Telegram",
+      "type": "n8n-nodes-base.telegram",
+      "position": [1250, 300],
+      "parameters": {
+        "operation": "sendMessage",
+        "chatId": "YOUR_CHAT_ID",
+        "text": "📰 Daily Tech Digest\n\n{{ $json.message.content }}"
+      }
+    }
+  ],
+  "connections": {
+    "trigger": {
+      "main": [["rss1", "rss2"]]
+    },
+    "rss1": {
+      "main": [["merge"]]
+    },
+    "rss2": {
+      "main": [["merge"]]
+    },
+    "merge": {
+      "main": [["format"]]
+    },
+    "format": {
+      "main": [["openai"]]
+    },
+    "openai": {
+      "main": [["telegram"]]
+    }
+  },
+  "settings": {
+    "saveManualExecutions": true
+  },
+  "tags": ["content", "ai", "rss", "digest"],
+  "meta": {
+    "author": "Neo (AI Assistant)",
+    "version": "1.0.0",
+    "created": "2026-02-11",
+    "category": "Content & Media"
+  }
+}

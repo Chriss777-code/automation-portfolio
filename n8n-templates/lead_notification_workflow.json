@@ -1,0 +1,146 @@
+{
+  "name": "Lead Notification Workflow",
+  "description": "Monitor a Google Sheet for new leads and send notifications to Telegram/Slack/Email",
+  "nodes": [
+    {
+      "id": "trigger",
+      "name": "Schedule Trigger",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "position": [250, 300],
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "field": "minutes",
+              "minutesInterval": 5
+            }
+          ]
+        }
+      },
+      "notes": "Check for new leads every 5 minutes. Adjust as needed."
+    },
+    {
+      "id": "sheets",
+      "name": "Google Sheets",
+      "type": "n8n-nodes-base.googleSheets",
+      "position": [450, 300],
+      "parameters": {
+        "operation": "read",
+        "sheetId": "YOUR_SHEET_ID",
+        "range": "Leads!A:Z",
+        "options": {
+          "returnAllMatches": false
+        }
+      },
+      "notes": "Replace YOUR_SHEET_ID with your actual Google Sheet ID"
+    },
+    {
+      "id": "filter",
+      "name": "Filter New Leads",
+      "type": "n8n-nodes-base.filter",
+      "position": [650, 300],
+      "parameters": {
+        "conditions": {
+          "boolean": [
+            {
+              "value1": "={{ $json.Status }}",
+              "value2": "New"
+            }
+          ]
+        }
+      },
+      "notes": "Only process leads with Status = 'New'"
+    },
+    {
+      "id": "telegram",
+      "name": "Telegram Notification",
+      "type": "n8n-nodes-base.telegram",
+      "position": [850, 200],
+      "parameters": {
+        "operation": "sendMessage",
+        "chatId": "YOUR_CHAT_ID",
+        "text": "🔔 New Lead!\n\nName: {{ $json.Name }}\nEmail: {{ $json.Email }}\nPhone: {{ $json.Phone }}\nSource: {{ $json.Source }}\n\nTime: {{ $now.format('YYYY-MM-DD HH:mm') }}"
+      },
+      "notes": "Replace YOUR_CHAT_ID with your Telegram chat/group ID"
+    },
+    {
+      "id": "slack",
+      "name": "Slack Notification (Optional)",
+      "type": "n8n-nodes-base.slack",
+      "position": [850, 400],
+      "parameters": {
+        "operation": "postMessage",
+        "channel": "#leads",
+        "text": "🔔 New Lead: {{ $json.Name }} ({{ $json.Email }})",
+        "attachments": [
+          {
+            "color": "#36a64f",
+            "fields": [
+              {
+                "title": "Phone",
+                "value": "{{ $json.Phone }}",
+                "short": true
+              },
+              {
+                "title": "Source",
+                "value": "{{ $json.Source }}",
+                "short": true
+              }
+            ]
+          }
+        ]
+      },
+      "notes": "Optional: Send to Slack as well"
+    },
+    {
+      "id": "update_status",
+      "name": "Update Status to Notified",
+      "type": "n8n-nodes-base.googleSheets",
+      "position": [1050, 300],
+      "parameters": {
+        "operation": "update",
+        "sheetId": "YOUR_SHEET_ID",
+        "range": "Leads!A:Z",
+        "options": {
+          "valueInputMode": "USER_ENTERED"
+        },
+        "dataMode": "autoMapInputData",
+        "matchingColumns": ["Email"],
+        "columnsToUpdate": {
+          "Status": "Notified"
+        }
+      },
+      "notes": "Mark lead as 'Notified' to avoid duplicate notifications"
+    }
+  ],
+  "connections": {
+    "trigger": {
+      "main": [["sheets"]]
+    },
+    "sheets": {
+      "main": [["filter"]]
+    },
+    "filter": {
+      "main": [["telegram", "slack"]]
+    },
+    "telegram": {
+      "main": [["update_status"]]
+    },
+    "slack": {
+      "main": [["update_status"]]
+    }
+  },
+  "settings": {
+    "saveManualExecutions": true,
+    "saveDataErrorExecution": "all",
+    "saveDataSuccessExecution": "all"
+  },
+  "staticData": null,
+  "tags": ["leads", "notification", "crm"],
+  "meta": {
+    "author": "Neo (AI Assistant)",
+    "version": "1.0.0",
+    "created": "2026-02-11",
+    "category": "Sales & CRM"
+  }
+}

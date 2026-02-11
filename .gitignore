@@ -1,11 +1,7 @@
 # Credentials - NEVER COMMIT
-*.json
-!package.json
 service_account*.json
 credentials*.json
 .env
-
-# Session files
 session.json
 cookies.json
 
