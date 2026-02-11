@@ -1,42 +1,78 @@
-# Chris S. - Automation & Web Scraping Portfolio
+# Automation Portfolio 🤖
 
-Professional automation engineer specializing in browser automation, web scraping, and data pipeline development.
+**Professional automation tools for web scraping, data extraction, and workflow automation**
 
-## 🛠️ Skills
+Created by Chris Soto | [GitHub](https://github.com/Chriss777-code)
 
-- **Browser Automation**: Playwright, Puppeteer, Selenium
-- **Web Scraping**: BeautifulSoup, Scrapy, custom solutions
-- **Languages**: Python, Node.js, JavaScript
-- **APIs**: Google Sheets, Telegram Bot, REST/GraphQL
-- **Anti-Detection**: Stealth mode, fingerprint management, proxy rotation
+## 🛠️ Projects
 
-## 📁 Projects
+### Data Extraction
+| Project | Description | Tech Stack |
+|---------|-------------|------------|
+| [stealth-scraper](./stealth-scraper) | Anti-detection web scraping | Playwright, Python |
+| [linkedin-extractor](./linkedin-extractor) | LinkedIn profile data extraction | Playwright, Python |
+| [pdf-extractor](./pdf-extractor) | PDF table and text extraction | pdfplumber, Python |
+| [web-scraper-examples](./web-scraper-examples) | Generic scraping patterns | Playwright, BeautifulSoup |
 
-### [Automation Templates](./automation-templates)
-Production-ready Playwright templates with stealth mode, session persistence, and anti-detection measures.
+### Automation
+| Project | Description | Tech Stack |
+|---------|-------------|------------|
+| [n8n-templates](./n8n-templates) | Ready-to-import n8n workflows | n8n, JSON |
+| [automation-templates](./automation-templates) | Playwright automation templates | Playwright, Python |
+| [price-monitor](./price-monitor) | E-commerce price tracking | Playwright, Python |
 
-### [Web Scraper Examples](./web-scraper-examples)
-Clean, efficient web scraping solutions for various use cases including e-commerce, financial data, and content aggregation.
+### Integration
+| Project | Description | Tech Stack |
+|---------|-------------|------------|
+| [sheets-integration](./sheets-integration) | Google Sheets data pipelines | Google APIs, Python |
+| [telegram-bot-framework](./telegram-bot-framework) | Telegram bot architecture | python-telegram-bot |
+| [parallel-research-tool](./parallel-research-tool) | AI sub-agent orchestration | OpenClaw, Python |
 
-### [Google Sheets Integration](./sheets-integration)
-Automated data pipelines that extract, transform, and load data directly into Google Sheets via API.
+## 🔥 Key Features
 
-### [Telegram Bot Framework](./telegram-bot-framework)
-Modular Telegram bot architecture for notifications, commands, and automated workflows.
+- **Anti-Detection**: All web scrapers include stealth techniques
+- **Rate Limiting**: Built-in delays and throttling
+- **Session Persistence**: Save and reuse login sessions
+- **Multiple Outputs**: JSON, CSV, Google Sheets formats
+- **Production Ready**: Error handling, logging, documentation
 
-## 📫 Contact
+## 📦 Quick Start
 
-- **Upwork**: [Available for hire]
-- **Email**: [Your email]
+```bash
+# Clone the repo
+git clone https://github.com/Chriss777-code/automation-portfolio.git
+cd automation-portfolio
 
-## 💼 Services
+# Install dependencies for a project
+cd stealth-scraper
+pip install -r requirements.txt
+playwright install chromium
 
-- Custom web scraping solutions
-- Browser automation for repetitive tasks
-- Data pipeline development
+# Run
+python stealth_scraper.py
+```
+
+## 🎯 Services Available
+
+Looking for custom automation? I can help with:
+
+- Web scraping (any site, anti-detection included)
+- Data extraction from PDFs and documents
+- Google Sheets automation
+- n8n/Make workflow development
+- Telegram bot development
+- Price monitoring systems
+- LinkedIn data extraction
 - API integrations
-- Bot development (Telegram, Discord)
+
+## 📬 Contact
+
+Available for freelance work on Upwork.
+
+## 📝 License
+
+MIT - Use freely, modify as needed.
 
 ---
 
-*All code samples are sanitized versions of production systems.*
+*Built with ☕ and Python*
