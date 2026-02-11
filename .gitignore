@@ -1,0 +1,33 @@
+# Credentials - NEVER COMMIT
+*.json
+!package.json
+service_account*.json
+credentials*.json
+.env
+
+# Session files
+session.json
+cookies.json
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+.Python
+venv/
+.venv/
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Output files
+*.csv
+*.log
+screenshots/
